@@ -1,0 +1,49 @@
+init R3,  4
+init R0,  6
+ldup R3,  R0
+init R0,  0
+init R1,  -1
+init R0,  0
+ldup R1,  R0
+init R2,  6
+add  R2,  R2
+add  R2,  R2
+jmp  1
+jmp  -5
+add  R2,  R2
+addi R2,  1
+addi R2,  1
+addi R2,  1
+add  R2,  R2
+init R2,  -8
+jmp  1
+jmp  -8
+add  R2,  R2
+add  R2,  R2
+addi R2,  1
+addi R2,  1
+addi R2,  1
+addi R2,  1
+jmp  1
+jmp  -8
+add  R2,  R2
+addi R2,  1
+xor  R1,  R2
+sb   R1, (R0)
+addi R0,  1
+addi R3,  -1
+bnz  -8
+add  R3,  R0
+init R0,  -8
+init R2,  0
+ldup R2,  R0
+init R0,  0
+lb   R1, (R0)
+wdth R1,  1
+sb   R1, (R2)
+addi R2,  1
+addi R0,  1
+lb   R1, (R0)
+addi R3,  -1
+bnz  -7
+halt

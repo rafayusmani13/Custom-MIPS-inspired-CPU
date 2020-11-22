@@ -1,0 +1,41 @@
+## Part 1 ##
+# generating an array of numbers, A1 - A100
+# Used register list: 0, 1, 2, 3
+
+init R3,  4     # 4   == 00000100
+init R0,  6	# 6   == 00000110
+ldup R3,  R0 	# 100 == 01100100 == loop counter
+
+init R0,  0	# initial DM address
+init R1,  1	# initial A 
+
+init R2,  1     # B
+add  R1,  R2    # R2 = A(i) + B
+init R2,  -1    # C
+xor  R1,  R2    # R2 = [A(i) + B] xor C
+sb   R1, (R0)   # R2 => DM[R0]
+addi R0,  1     # R0++
+addi R3,  -1    # R3--
+
+bnz  -8   	# if R3 != 0, -8
+
+## Part 2 ##
+# generating width array, W1 – W100
+# Used register list: 0, 1, 2, 3
+
+add  R3,  R0	# loop counter == 100
+init R0,  -8	# 11111000
+init R2,  0	# 00000000	
+ldup R2,  R0	# W DM address == 10000000 == 128
+init R0,  0	# A DM address
+lb   R1, (R0)   # A == R1 <= DM[R0]
+
+wdth R1, R1	# W = width(A)
+sb   R1, R2	# W == R1 => DM[R2]
+addi R2,  1     # R2++ W DM address
+addi R0,  1     # R0++ A DM address
+lb   R1, (R0)   # A == R1 <= DM[R0]
+addi R3,  -1    # R3-- loop counter
+
+bnz  -7   	# if R3 != 0, -7
+halt		# end program
